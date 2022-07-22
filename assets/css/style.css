@@ -1,5 +1,6 @@
 :root {
   --dark-purple: #713DD4;
+  --light-purple: #9571DA;
 }
 
 * {
@@ -54,4 +55,14 @@ main {
   font-size: 20px;
   border: none;
   border-radius: 10px;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+
+.btn:hover {
+  background-color: var(--light-purple);
+  cursor: pointer;
+}
+
+.btn:active {
+  opacity: .75;
 }
