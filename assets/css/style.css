@@ -1,0 +1,57 @@
+:root {
+  --dark-purple: #713DD4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  padding: 20px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+header div {
+  font-size: 21px;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 200px 0;
+}
+
+.intro {
+  text-align: center;
+}
+
+.intro h1, .intro p, .intro button {
+  margin-bottom: 20px;
+}
+
+.intro h1 {
+  font-size: 50px;
+}
+
+.intro p {
+  font-size: 25px;
+  padding: 0 100px;
+}
+
+.btn {
+  background-color: var(--dark-purple);
+  color: white;
+  padding: 10px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+}
