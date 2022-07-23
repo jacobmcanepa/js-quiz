@@ -1,4 +1,44 @@
+var mainEl = document.querySelector("main");
 var startQuizEl = document.querySelector("#start-quiz");
+var sectionEl = document.querySelector("#section");
+var questionsIndex = -1;
+var questions = [
+  {
+    Q: "Question 1",
+    A1: "Answer 1",
+    A2: "Answer 2",
+    A3: "Answer 3",
+    A4: "Answer 4"
+  },
+  {
+    Q: "Question 2",
+    A1: "Answer 1",
+    A2: "Answer 2",
+    A3: "Answer 3",
+    A4: "Answer 4"
+  },
+  {
+    Q: "Question 3",
+    A1: "Answer 1",
+    A2: "Answer 2",
+    A3: "Answer 3",
+    A4: "Answer 4"
+  },
+  {
+    Q: "Question 4",
+    A1: "Answer 1",
+    A2: "Answer 2",
+    A3: "Answer 3",
+    A4: "Answer 4"
+  },
+  {
+    Q: "Question 5",
+    A1: "Answer 1",
+    A2: "Answer 2",
+    A3: "Answer 3",
+    A4: "Answer 4"
+  }
+];
 
 var startTimer = function() {
   var counter = 60;
@@ -6,7 +46,7 @@ var startTimer = function() {
 
   timer.innerHTML = counter;
 
-  var timeInterval =   setInterval(function() {
+  var timeInterval = setInterval(function() {
     if (counter >= 1) {
       counter--;
       timer.innerHTML = counter;
@@ -19,4 +59,63 @@ var startTimer = function() {
   }, 1000)
 };
 
+var displayQuestion = function(question) {
+  var questionSectionEl = document.createElement("section");
+  questionSectionEl.setAttribute("id", "section");
+  questionSectionEl.innerHTML = "<h2>" + question.Q + "</h2>";
+  
+  var buttonListEl = document.createElement("ul");
+  // set attributes and classes later
+
+  var listItemEl1 = document.createElement("li");
+  var button1El = document.createElement("button");
+  button1El.textContent = question.A1
+  button1El.className = "btn answer";
+  listItemEl1.appendChild(button1El);
+  buttonListEl.appendChild(listItemEl1);
+
+  var listItemEl2 = document.createElement("li");
+  var button2El = document.createElement("button");
+  button2El.textContent = question.A2
+  button2El.className = "btn answer";
+  listItemEl2.appendChild(button2El);
+  buttonListEl.appendChild(listItemEl2);
+
+  var listItemEl3 = document.createElement("li");
+  var button3El = document.createElement("button");
+  button3El.textContent = question.A3
+  button3El.className = "btn answer";
+  listItemEl3.appendChild(button3El);
+  buttonListEl.appendChild(listItemEl3);
+
+  var listItemEl4 = document.createElement("li");
+  var button4El = document.createElement("button");
+  button4El.textContent = question.A4
+  button4El.className = "btn answer";
+  listItemEl4.appendChild(button4El);
+  buttonListEl.appendChild(listItemEl4);
+
+  questionSectionEl.appendChild(buttonListEl);
+  mainEl.appendChild(questionSectionEl);
+
+};
+
+var nextQuestion = function() {
+  sectionEl.remove();
+  questionsIndex++;
+  displayQuestion(questions[questionsIndex]);
+};
+
+var answerButtonHandler = function(event) {
+  var targetEl = event.target;
+
+  if (targetEl.matches(".answer")) {
+    var currentSection = document.querySelector("#section");
+    currentSection.remove();
+    nextQuestion();
+  }
+};
+
 startQuizEl.addEventListener("click", startTimer);
+startQuizEl.addEventListener("click", nextQuestion);
+mainEl.addEventListener("click", answerButtonHandler);
