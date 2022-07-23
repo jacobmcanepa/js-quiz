@@ -69,6 +69,7 @@ var displayQuestion = function(question) {
 
   var listItemEl1 = document.createElement("li");
   var button1El = document.createElement("button");
+  button1El.setAttribute("data-answer-id", 1)
   button1El.textContent = question.A1
   button1El.className = "btn answer";
   listItemEl1.appendChild(button1El);
@@ -76,6 +77,7 @@ var displayQuestion = function(question) {
 
   var listItemEl2 = document.createElement("li");
   var button2El = document.createElement("button");
+  button2El.setAttribute("data-answer-id", 2)
   button2El.textContent = question.A2
   button2El.className = "btn answer";
   listItemEl2.appendChild(button2El);
@@ -83,6 +85,7 @@ var displayQuestion = function(question) {
 
   var listItemEl3 = document.createElement("li");
   var button3El = document.createElement("button");
+  button3El.setAttribute("data-answer-id", 3)
   button3El.textContent = question.A3
   button3El.className = "btn answer";
   listItemEl3.appendChild(button3El);
@@ -90,6 +93,7 @@ var displayQuestion = function(question) {
 
   var listItemEl4 = document.createElement("li");
   var button4El = document.createElement("button");
+  button4El.setAttribute("data-answer-id", 4)
   button4El.textContent = question.A4
   button4El.className = "btn answer";
   listItemEl4.appendChild(button4El);
@@ -110,6 +114,73 @@ var answerButtonHandler = function(event) {
   var targetEl = event.target;
 
   if (targetEl.matches(".answer")) {
+    var answerId = targetEl.getAttribute("data-answer-id");
+    
+    // QUESTION 1
+    if (answerId === "4") {
+      if (questionsIndex === 0) {
+        console.log("correct");
+      }
+    }
+
+    if (answerId !== "4") {
+      if (questionsIndex === 0) {
+        console.log("incorrect");
+      }
+    }
+
+    // QUESTION 2
+    if (answerId === "2") {
+      if (questionsIndex === 1) {
+        console.log("correct");
+      }
+    }
+
+    if (answerId !== "2") {
+      if (questionsIndex === 1) {
+        console.log("incorrect");
+      }
+    }
+
+    // QUESTION 3
+    if (answerId === "1") {
+      if (questionsIndex === 2) {
+        console.log("correct");
+      }
+    }
+
+    if (answerId !== "1") {
+      if (questionsIndex === 2) {
+        console.log("incorrect");
+      }
+    }
+
+    // QUESTION 4
+    if (answerId === "3") {
+      if (questionsIndex === 3) {
+        console.log("correct");
+      }
+    }
+
+    if (answerId !== "3") {
+      if (questionsIndex === 3) {
+        console.log("incorrect");
+      }
+    }
+
+    // QUESTION 5
+    if (answerId === "2") {
+      if (questionsIndex === 4) {
+        console.log("correct");
+      }
+    }
+
+    if (answerId !== "2") {
+      if (questionsIndex === 4) {
+        console.log("incorrect");
+      }
+    }
+
     var currentSection = document.querySelector("#section");
     currentSection.remove();
     nextQuestion();
