@@ -223,20 +223,39 @@ var inputInitialsPage = function() {
 
   var inputEl = document.createElement("input");
   inputEl.setAttribute("type", "text");
+  inputEl.setAttribute("name", "initials");
   formDivEl.appendChild(inputEl);
 
   var submitBtnEl = document.createElement("button");
-  submitBtnEl.className = "btn";
+  submitBtnEl.className = "btn submit";
   submitBtnEl.setAttribute("type", "submit");
   submitBtnEl.textContent = "Submit";
   formDivEl.appendChild(submitBtnEl);
 
   inputPageSection.appendChild(formDivEl);
   mainEl.appendChild(inputPageSection);
+};
 
-  console.log(inputPageSection);
+var submitButtonHandler = function(event) {
+  targetEl = event.target;
+
+  var initialsInput = document.querySelector("input[name='initials']").value;
+
+  if (targetEl.matches(".submit")) {
+    if (!initialsInput) {
+      alert("You need to enter your initials!");
+      return false;
+    }
+    
+    else {
+      var currentSection = document.querySelector("#section");
+      currentSection.remove();
+      console.log(initialsInput);
+    }
+  }
 };
 
 startQuizEl.addEventListener("click", startTimer);
 startQuizEl.addEventListener("click", nextQuestion);
 mainEl.addEventListener("click", answerButtonHandler);
+mainEl.addEventListener("click", submitButtonHandler);
