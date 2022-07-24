@@ -2,6 +2,8 @@ var mainEl = document.querySelector("main");
 var startQuizEl = document.querySelector("#start-quiz");
 var sectionEl = document.querySelector("#section");
 var questionsIndex = -1;
+var counter = 10;
+var isPaused = false;
 var questions = [
   {
     Q: "Question 1",
@@ -41,22 +43,33 @@ var questions = [
 ];
 
 var startTimer = function() {
-  var counter = 60;
   var timer = document.querySelector("#timer");
 
   timer.innerHTML = counter;
 
   var timeInterval = setInterval(function() {
-    if (counter >= 1) {
-      counter--;
-      timer.innerHTML = counter;
+    if (!isPaused) {
+      if (counter >= 1) {
+        counter--;
+        timer.innerHTML = counter;
+      }
+  
+      else {
+        timer.innerHTML = 0;
+        clearInterval(timeInterval);
+        inputInitialsPage();
+      }
     }
 
-    else {
-      timer.innerHTML = 0;
+    if (isPaused) {
       clearInterval(timeInterval);
+      inputInitialsPage();
     }
   }, 1000)
+};
+
+var pause = function() {
+  isPaused = true;
 };
 
 var displayQuestion = function(question) {
@@ -107,7 +120,14 @@ var displayQuestion = function(question) {
 var nextQuestion = function() {
   sectionEl.remove();
   questionsIndex++;
-  displayQuestion(questions[questionsIndex]);
+
+  if (questionsIndex < questions.length) {
+    displayQuestion(questions[questionsIndex]);
+  }
+
+  else if (questionsIndex >= questions.length) {
+    pause();
+  }
 };
 
 var answerButtonHandler = function(event) {
@@ -185,6 +205,36 @@ var answerButtonHandler = function(event) {
     currentSection.remove();
     nextQuestion();
   }
+};
+
+var inputInitialsPage = function() {
+  var currentSection = document.querySelector("#section");
+  if (currentSection != null) {
+    currentSection.remove();
+  }
+
+  var inputPageSection = document.createElement("section");
+  inputPageSection.setAttribute("id", "section");
+  inputPageSection.innerHTML = "<h2>All done!</h2><p>Your final score is " + counter + ".</p>"
+
+  var formDivEl = document.createElement("div");
+  formDivEl.className = "form-group";
+  formDivEl.innerHTML = "<p>Enter initials: </p>";
+
+  var inputEl = document.createElement("input");
+  inputEl.setAttribute("type", "text");
+  formDivEl.appendChild(inputEl);
+
+  var submitBtnEl = document.createElement("button");
+  submitBtnEl.className = "btn";
+  submitBtnEl.setAttribute("type", "submit");
+  submitBtnEl.textContent = "Submit";
+  formDivEl.appendChild(submitBtnEl);
+
+  inputPageSection.appendChild(formDivEl);
+  mainEl.appendChild(inputPageSection);
+
+  console.log(inputPageSection);
 };
 
 startQuizEl.addEventListener("click", startTimer);
