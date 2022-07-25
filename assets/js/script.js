@@ -2,8 +2,7 @@ var mainEl = document.querySelector("main");
 var startQuizEl = document.querySelector("#start-quiz");
 var sectionEl = document.querySelector("#section");
 var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
-console.log(highScores);
-var maxHighScore = 5;
+var initialsInput = "";
 var questionsIndex = -1;
 var counter = 10;
 var isPaused = false;
@@ -243,35 +242,54 @@ var submitButtonHandler = function(event) {
   targetEl = event.target;
 
   if (targetEl.matches(".submit")) {
-    var initialsInput = document.querySelector("input[name='initials']").value;
-    
+    initialsInput = document.querySelector("input[name='initials']").value;
+
     if (!initialsInput) {
       alert("You need to enter your initials!");
       return false;
     }
     
-    else {
-      var currentSection = document.querySelector("#section");
-      // currentSection.remove();
-      
-      var score = {
-        score: counter,
-        name: initialsInput
-      };
-
-      highScores.push(score);
-      highScores.sort((a,b) => b.score - a.score);
-      highScores.splice(5);
-
-      localStorage.setItem("highscores", JSON.stringify(highScores));
-
-      console.log(highScores);
-
+    else {   
+      displayHighScores();
     }
   }
 };
 
-// 
+var displayHighScores = function() {
+  var currentSection = document.querySelector("#section");
+  currentSection.remove();
+
+  var score = {
+    score: counter,
+    name: initialsInput
+  };
+
+  highScores.push(score);
+  highScores.sort((a,b) => b.score - a.score);
+  highScores.splice(5);
+
+  localStorage.setItem("highscores", JSON.stringify(highScores));
+
+  scoreSectionEl = document.createElement("section");
+  scoreSectionEl.setAttribute("id", "section");
+  scoreSectionEl.innerHTML = "<h2>High Scores</h2>"
+
+  listEl = document.createElement("ol");
+
+  buttonEl = document.createElement("button");
+  buttonEl.className = "btn try-again";
+  buttonEl.textContent = "Try Again";
+
+  for (var i = 0; i < highScores.length; i++) {
+    scoreEl = document.createElement("li");
+    scoreEl.textContent = highScores[i].name + " - " + highScores[i].score;
+    listEl.appendChild(scoreEl);
+  }
+
+  scoreSectionEl.appendChild(listEl);
+  scoreSectionEl.appendChild(buttonEl);
+  mainEl.appendChild(scoreSectionEl);
+};
 
 startQuizEl.addEventListener("click", startTimer);
 startQuizEl.addEventListener("click", nextQuestion);
