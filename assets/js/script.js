@@ -4,7 +4,7 @@ var sectionEl = document.querySelector("#section");
 var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
 var initialsInput = "";
 var questionsIndex = -1;
-var counter = 10;
+var counter = 30;
 var isPaused = false;
 var questions = [
   {
@@ -148,6 +148,7 @@ var answerButtonHandler = function(event) {
     if (answerId !== "4") {
       if (questionsIndex === 0) {
         console.log("incorrect");
+        counter = counter - 10;
       }
     }
 
@@ -161,6 +162,7 @@ var answerButtonHandler = function(event) {
     if (answerId !== "2") {
       if (questionsIndex === 1) {
         console.log("incorrect");
+        counter = counter - 10;
       }
     }
 
@@ -174,6 +176,7 @@ var answerButtonHandler = function(event) {
     if (answerId !== "1") {
       if (questionsIndex === 2) {
         console.log("incorrect");
+        counter = counter - 10;
       }
     }
 
@@ -187,6 +190,7 @@ var answerButtonHandler = function(event) {
     if (answerId !== "3") {
       if (questionsIndex === 3) {
         console.log("incorrect");
+        counter = counter - 10;
       }
     }
 
@@ -200,6 +204,7 @@ var answerButtonHandler = function(event) {
     if (answerId !== "2") {
       if (questionsIndex === 4) {
         console.log("incorrect");
+        counter = counter - 10;
       }
     }
 
