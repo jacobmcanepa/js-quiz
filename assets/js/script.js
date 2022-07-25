@@ -291,7 +291,16 @@ var displayHighScores = function() {
   mainEl.appendChild(scoreSectionEl);
 };
 
+var tryAgainHandler = function(event) {
+  targetEl = event.target;
+
+  if (targetEl.matches(".try-again")) {
+    window.location.assign("/");
+  }
+};
+
 startQuizEl.addEventListener("click", startTimer);
 startQuizEl.addEventListener("click", nextQuestion);
 mainEl.addEventListener("click", answerButtonHandler);
 mainEl.addEventListener("click", submitButtonHandler);
+mainEl.addEventListener("click", tryAgainHandler);
