@@ -1,6 +1,9 @@
 var mainEl = document.querySelector("main");
 var startQuizEl = document.querySelector("#start-quiz");
 var sectionEl = document.querySelector("#section");
+var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
+console.log(highScores);
+var maxHighScore = 5;
 var questionsIndex = -1;
 var counter = 10;
 var isPaused = false;
@@ -62,8 +65,8 @@ var startTimer = function() {
     }
 
     if (isPaused) {
-      clearInterval(timeInterval);
       inputInitialsPage();
+      clearInterval(timeInterval);
     }
   }, 1000)
 };
@@ -239,9 +242,9 @@ var inputInitialsPage = function() {
 var submitButtonHandler = function(event) {
   targetEl = event.target;
 
-  var initialsInput = document.querySelector("input[name='initials']").value;
-
   if (targetEl.matches(".submit")) {
+    var initialsInput = document.querySelector("input[name='initials']").value;
+    
     if (!initialsInput) {
       alert("You need to enter your initials!");
       return false;
@@ -249,11 +252,26 @@ var submitButtonHandler = function(event) {
     
     else {
       var currentSection = document.querySelector("#section");
-      currentSection.remove();
-      console.log(initialsInput);
+      // currentSection.remove();
+      
+      var score = {
+        score: counter,
+        name: initialsInput
+      };
+
+      highScores.push(score);
+      highScores.sort((a,b) => b.score - a.score);
+      highScores.splice(5);
+
+      localStorage.setItem("highscores", JSON.stringify(highScores));
+
+      console.log(highScores);
+
     }
   }
 };
+
+// 
 
 startQuizEl.addEventListener("click", startTimer);
 startQuizEl.addEventListener("click", nextQuestion);
