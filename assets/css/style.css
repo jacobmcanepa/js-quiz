@@ -13,6 +13,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* HEADER */
 header {
   padding: 20px 50px;
   display: flex;
@@ -24,10 +25,12 @@ header div {
   font-size: 21px;
 }
 
+/* MAIN CONTENT */
 main {
   display: flex;
   flex-wrap: wrap;
   margin: 200px 0;
+  justify-content: center;
 }
 
 .intro {
@@ -39,19 +42,20 @@ main {
 }
 
 .intro h1 {
-  font-size: 50px;
+  font-size: 80px;
 }
 
 .intro p {
-  font-size: 25px;
-  padding: 0 100px;
+  font-size: 35px;
+  padding: 40px 100px;
 }
 
+/* UNIVERSAL BUTTON STYLE */
 .btn {
   background-color: var(--dark-purple);
   color: white;
   padding: 10px 30px;
-  font-size: 20px;
+  font-size: 40px;
   border: none;
   border-radius: 10px;
   transition: background-color 0.15s, opacity 0.15s;
@@ -65,3 +69,77 @@ main {
 .btn:active {
   opacity: .75;
 }
+
+/* QUESTION STYLE */
+.question-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20px;
+}
+
+.question-section ul {
+  flex: 0 0 100%;
+  list-style: none;
+}
+
+.question-section h2 {
+  margin-bottom: 20px;
+  font-size: 45px;
+}
+
+.question-section ul li {
+  margin-bottom: 15px;
+}
+
+.question-section ul li button {
+  font-size: 40px;
+}
+
+/* INPUT PAGE STYLE */
+.input-section h2 {
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+.input-section p {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+#input-p {
+  display: inline;
+}
+
+.form-group input {
+  width: 100%;
+  height: 50px;
+  margin: 20px 0;
+  font-size: 30px;
+}
+
+/* HIGH SCORES STYLE */
+.high-score-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.high-score-section h2 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.high-score-section ul {
+  list-style: none;
+  flex: 100%;
+}
+
+.high-score-section ul li {
+  font-size: 30px;
+  padding: 10px 0;
+  border-bottom: 2px solid;
+}
+
+.high-score-section button {
+  margin-top: 40px;
+}
+

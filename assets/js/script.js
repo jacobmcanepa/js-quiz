@@ -4,43 +4,43 @@ var sectionEl = document.querySelector("#section");
 var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
 var initialsInput = "";
 var questionsIndex = -1;
-var counter = 30;
+var counter = 60;
 var isPaused = false;
 var questions = [
   {
-    Q: "Question 1",
-    A1: "Answer 1",
-    A2: "Answer 2",
-    A3: "Answer 3",
-    A4: "Answer 4"
+    Q: "  ______ JavaScript is also called client-side JavaScript.",
+    A1: "Microsoft",
+    A2: "LiveWire",
+    A3: "Native",
+    A4: "Navigator"
   },
   {
-    Q: "Question 2",
-    A1: "Answer 1",
-    A2: "Answer 2",
-    A3: "Answer 3",
-    A4: "Answer 4"
+    Q: 'What is the correct JavaScript syntax to write "Hello World"?',
+    A1: 'System.out.println("Hello World")',
+    A2: 'document.write("Hello World")',
+    A3: 'println ("Hello World")',
+    A4: 'response.write("Hello World")'
   },
   {
-    Q: "Question 3",
-    A1: "Answer 1",
-    A2: "Answer 2",
-    A3: "Answer 3",
-    A4: "Answer 4"
+    Q: "Inside which HTML element do we put the JavaScript?",
+    A1: "<script>",
+    A2: "<js>",
+    A3: "<scripting>",
+    A4: "<javascript>"
   },
   {
-    Q: "Question 4",
-    A1: "Answer 1",
-    A2: "Answer 2",
-    A3: "Answer 3",
-    A4: "Answer 4"
+    Q: "JavaScript entities start with _______ and end with _________.",
+    A1: "Semicolon, colon",
+    A2: "Semicolon, Ampersand",
+    A3: "Ampersand, semicolon",
+    A4: "Ampersand, colon"
   },
   {
-    Q: "Question 5",
-    A1: "Answer 1",
-    A2: "Answer 2",
-    A3: "Answer 3",
-    A4: "Answer 4"
+    Q: "Which of the following best describes JavaScript?",
+    A1: "a low-level programming language.",
+    A2: "an object-oriented scripting language.",
+    A3: "a scripting language precompiled in the browser.",
+    A4: "a compiled scripting language."
   }
 ];
 
@@ -78,6 +78,7 @@ var displayQuestion = function(question) {
   var questionSectionEl = document.createElement("section");
   questionSectionEl.setAttribute("id", "section");
   questionSectionEl.innerHTML = "<h2>" + question.Q + "</h2>";
+  questionSectionEl.className = "question-section"
   
   var buttonListEl = document.createElement("ul");
   // set attributes and classes later
@@ -116,6 +117,7 @@ var displayQuestion = function(question) {
 
   questionSectionEl.appendChild(buttonListEl);
   mainEl.appendChild(questionSectionEl);
+  console.log(mainEl);
 
 };
 
@@ -137,11 +139,12 @@ var answerButtonHandler = function(event) {
 
   if (targetEl.matches(".answer")) {
     var answerId = targetEl.getAttribute("data-answer-id");
+    var timer = document.querySelector("#timer");
     
     // QUESTION 1
     if (answerId === "4") {
       if (questionsIndex === 0) {
-        console.log("correct");
+        console.log("correct");   
       }
     }
 
@@ -205,6 +208,7 @@ var answerButtonHandler = function(event) {
       if (questionsIndex === 4) {
         console.log("incorrect");
         counter = counter - 10;
+        timer.innerHTML = counter;
       }
     }
 
@@ -223,10 +227,11 @@ var inputInitialsPage = function() {
   var inputPageSection = document.createElement("section");
   inputPageSection.setAttribute("id", "section");
   inputPageSection.innerHTML = "<h2>All done!</h2><p>Your final score is " + counter + ".</p>"
+  inputPageSection.className = "input-section";
 
   var formDivEl = document.createElement("div");
   formDivEl.className = "form-group";
-  formDivEl.innerHTML = "<p>Enter initials: </p>";
+  formDivEl.innerHTML = "<p id='input-p'>Enter initials: </p>";
 
   var inputEl = document.createElement("input");
   inputEl.setAttribute("type", "text");
@@ -278,8 +283,9 @@ var displayHighScores = function() {
   scoreSectionEl = document.createElement("section");
   scoreSectionEl.setAttribute("id", "section");
   scoreSectionEl.innerHTML = "<h2>High Scores</h2>"
+  scoreSectionEl.className = "high-score-section";
 
-  listEl = document.createElement("ol");
+  listEl = document.createElement("ul");
 
   buttonEl = document.createElement("button");
   buttonEl.className = "btn try-again";
@@ -287,7 +293,7 @@ var displayHighScores = function() {
 
   for (var i = 0; i < highScores.length; i++) {
     scoreEl = document.createElement("li");
-    scoreEl.textContent = highScores[i].name + " - " + highScores[i].score;
+    scoreEl.textContent = (i + 1) + ". " + highScores[i].name + " - " + highScores[i].score;
     listEl.appendChild(scoreEl);
   }
 
