@@ -306,7 +306,7 @@ var tryAgainHandler = function(event) {
   targetEl = event.target;
 
   if (targetEl.matches(".try-again")) {
-    window.location.assign("/");
+    window.location.assign("index.html");
   }
 };
 
